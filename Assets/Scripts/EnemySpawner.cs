@@ -8,6 +8,11 @@ public class EnemySpawner : MonoBehaviour {
 	public float spawnTimer = 10f;
 	public float enemySpeed = 2f;
 	public float enemyHP = 5f;
+	[Range(-4f, 0f)]
+	public float minHeightRange = -2f;
+	[Range( 0f, 4f)]
+	public float maxHeightRange = 2f;
+
 	public bool isRunning = false;
 
 	private bool eFlag = true;
@@ -44,7 +49,7 @@ public class EnemySpawner : MonoBehaviour {
 	{
 		// Create the Bullet from the Bullet Prefab
 
-		float randomHeight = Random.Range(1.5f, -2.0f );
+		float randomHeight = Random.Range(minHeightRange, maxHeightRange );
 		Vector3 randomPos = new Vector3 (transform.position.x, transform.position.y+randomHeight, transform.position.z);
 
 		var enemy = (GameObject)Instantiate (
