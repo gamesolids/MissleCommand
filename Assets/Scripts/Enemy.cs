@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
 
 	public GameObject DamageText;
 
+	[HideInInspector]
 	public SceneManager sm;
 
 	void Start(){
@@ -60,6 +61,7 @@ public class Enemy : MonoBehaviour {
 		//remove ship and clean up
 		Destroy (this.gameObject);
 		Destroy (splode, 2f);
+
 	}
 
 	public void DisplayText(string text){

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114596396500205934}
   - component: {fileID: 114075922143694482}
   m_Layer: 0
-  m_Name: Text
+  m_Name: DMGText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
