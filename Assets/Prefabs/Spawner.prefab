@@ -56,4 +56,6 @@ MonoBehaviour:
   spawnTimer: 2
   enemySpeed: 4
   enemyHP: 7
+  minHeightRange: -2
+  maxHeightRange: 2
   isRunning: 0

@@ -5,6 +5,12 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour {
 
 	public GameObject enemyPrefab;
+
+	[Range(0f,1f)]
+	public float mixinsWeght;
+	public GameObject[] mixinsPrefabs; 
+	private float mixCount = 0f;
+
 	public float spawnTimer = 10f;
 	public float enemySpeed = 2f;
 	public float enemyHP = 5f;
@@ -47,21 +53,40 @@ public class EnemySpawner : MonoBehaviour {
 
 	public void Spawn()
 	{
-		// Create the Bullet from the Bullet Prefab
 
+		GameObject projectile;
+		mixCount = mixCount + mixinsWeght;
 		float randomHeight = Random.Range(minHeightRange, maxHeightRange );
 		Vector3 randomPos = new Vector3 (transform.position.x, transform.position.y+randomHeight, transform.position.z);
 
-		var enemy = (GameObject)Instantiate (
-			enemyPrefab,
-			randomPos,
-			Quaternion.identity
-		);
-		enemy.GetComponent<Enemy>().hp = enemyHP;
-		enemy.GetComponent<Enemy>().sm = sm;
-		// Add velocity to the bullet
-		//enemy.GetComponent<Rigidbody>().velocity = transform.right * enemySpeed;
-		enemy.GetComponent<Rigidbody>().velocity = transform.right * sm.levelList[sm.currentLevel].shipSpeed;
+		if (mixCount >= 2f) {
+
+			projectile = (GameObject)Instantiate (
+				mixinsPrefabs[Random.Range(0,mixinsPrefabs.Length)],
+				randomPos,
+				Quaternion.identity
+			);
+
+			PowerUp p = projectile.GetComponent<PowerUp> ();
+			p.sm = sm;
+
+			mixCount = 0f;
+
+		} else {
+			// Create the Bullet from the Bullet Prefab
+
+			projectile = (GameObject)Instantiate (
+				enemyPrefab,
+				randomPos,
+				Quaternion.identity
+			);
+			Enemy e = projectile.GetComponent<Enemy> ();
+			e.hp = enemyHP;
+			e.sm = sm;
+		}
+
+		// Add velocity to the projectile
+		projectile.GetComponent<Rigidbody>().velocity = transform.right * sm.levelList[sm.currentLevel].shipSpeed;
 
 		//enemy is de-spawned by a de-spawner object in scene
 

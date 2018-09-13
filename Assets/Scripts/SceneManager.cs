@@ -18,6 +18,7 @@ public class SceneManager : MonoBehaviour {
 	public GameObject[] commandPoints;
 
 	public GameObject Explosion;
+	public GameObject ShieldPrefab;
 
 	public Button startButton;
 

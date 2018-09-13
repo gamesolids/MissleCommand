@@ -16,7 +16,7 @@ public class MissleCommand : MonoBehaviour {
 
 	[Range(5f,100f)]
 	public float bulletSpeed = 10f;
-	public int CooldownTimer = 10;
+	public float CooldownTimer = 10f;
 
 	private int timer = 0;
 	private bool mFlag = true;
@@ -80,7 +80,6 @@ public class MissleCommand : MonoBehaviour {
 				lsp.localScale = ls;
 			}
 
-
 			Gradient grad = new Gradient();
 			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.red, 0.0f), new GradientColorKey(Color.red, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
 
@@ -88,7 +87,6 @@ public class MissleCommand : MonoBehaviour {
 				Destroy (bump.gameObject,4f);
 
 			}
-
 		}
 	}
 
@@ -102,7 +100,8 @@ public class MissleCommand : MonoBehaviour {
 
 		// Add velocity to the bullet
 		bullet.GetComponent<Rigidbody>().velocity = transform.up * bulletSpeed;
-
+		bullet.gameObject.name = this.gameObject.name;
+		bullet.name = this.gameObject.GetInstanceID ().ToString();
 		// Destroy the bullet after 2 seconds
 		Destroy(bullet, 2.0f);
 	}
